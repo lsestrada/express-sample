@@ -1,0 +1,22 @@
+{
+  "name": "week3-repo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mmestica/week3-repo.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mmestica/week3-repo/issues"
+  },
+  "homepage": "https://github.com/mmestica/week3-repo#readme",
+  "dependencies": {
+    "exceljs": "^4.3.0"
+  }
+}
