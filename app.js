@@ -22,9 +22,8 @@ var result = {
     list: [],
 };
 
+var listDataJson = readFile();
 
-let listDataRaw = fs.readFileSync("database/person-list.json");
-listDataJson = JSON.parse(listDataRaw);
 
 app.post('/person', function (req, res) {
 
@@ -37,6 +36,7 @@ app.post('/person', function (req, res) {
         first_name: req.body.first_name,
         last_name: req.body.last_name,
     };
+    listDataJson = readFile();
     listDataJson.push(newPerson);
     writeFile(JSON.stringify(listDataJson));
     result.status = 1;
@@ -47,21 +47,33 @@ app.post('/person', function (req, res) {
 });
 
 app.get('/person', (req, res) => {
-    let listDataRaw = fs.readFileSync("database/person-list.json");
-    listDataJson = JSON.parse(listDataRaw);
-    result.status = 1;
+    listDataJson = readFile();
+     result.status = 1;
     result.message = "Displaying all person";
     result.list = listDataJson;
     res.send(result);
 });
 
-app.get('/person/:id', (req, res) => {
-    var id = req.params.id;
+// app.get('/person/:id', (req, res) => {
+//     var id = req.params.id;
+
+//     result.status = 1;
+//     result.message = "Displaying person with id " + id;
+//     result.list = listDataJson.filter((item) => {
+//         return +item.id == +id; // Note: + before variable means casting string value into integer
+//     });
+
+//     res.send(result);
+
+// });
+
+app.get('/person/:searchstr', (req, res) => {
+    var searchstr = req.params.searchstr;
 
     result.status = 1;
-    result.message = "Displaying person with id " + id;
+    result.message = "Displaying person with " + searchstr ;
     result.list = listDataJson.filter((item) => {
-        return +item.id == +id; // Note: + before variable means casting string value into integer
+        return (+item.id == +searchstr || item.first_name.toLowerCase().includes(searchstr) || item.last_name.toLowerCase().includes(searchstr)); // Note: + before variable means casting string value into integer
     });
 
     res.send(result);
@@ -108,8 +120,6 @@ app.delete('/person/:id', (req, res) => {
 });
 
 
-
-
 function writeFile(data) {
     fs.writeFile("database/person-list.json", data, function (err) {
         if (err) {
@@ -117,6 +127,12 @@ function writeFile(data) {
         }
         console.log("The file was saved!");
     });
+}
+
+function readFile(){
+    let listDataRaw = fs.readFileSync("database/person-list.json");
+    return JSON.parse(listDataRaw);
+
 }
 
 app.listen(3000, () => console.log('Listening to port 3000'));
