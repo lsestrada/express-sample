@@ -11,10 +11,21 @@ function loadList() {
         console.log(data);
         for (let person of data.list) {
           // console.log(person);
+          var $checked = "";
+          if(person.isFilipino)
+          {
+            $checked = "checked";
+          }  
           let rowHtml = `<tr>
                 <td><a href="form.html?id=${person.id}">${person.id}</a></td>
                 <td>${person.first_name}</td>
                 <td>${person.last_name}</td>
+                <td>${person.birthday}</td>
+                <td>${person.age}</td>
+                <td>${person.gender}</td>
+                <td>${person.email}</td>
+                <td>${person.mobile}</td>
+                <td><input type="checkbox" ` + $checked + ` disabled/></td>
                 <td><button onclick="deletePerson(${person.id}, '${person.first_name}')">Delete</button></td>
             </tr>`;
           $("#table1 > tbody").append(rowHtml);
@@ -33,7 +44,11 @@ function save() {
   let id = $("input[name=id]").val();
   let first_name = $("input[name=first_name]").val();
   let last_name = $("input[name=last_name]").val();
-
+  let gender = $("#gender").val();
+  let birthday = $("#birthday").val();
+  let email = $("#email").val();
+  let mobileno = $("#mobileno").val();
+  let isFilipino = $("#isFilipino").prop('checked');
   // let action = +id > 0 ? "update" : "insert";
   let action = +id > 0 ? "put" : "post";
   let url = +id > 0 ? id : "";
@@ -41,8 +56,15 @@ function save() {
   {
     id: id,
     first_name: first_name,
-    last_name: last_name
-  }
+    last_name: last_name,
+    birthday: birthday,
+    gender: gender,
+    email: email,
+    mobileno: mobileno,
+    age: 0,
+    isFilipino: isFilipino
+  };
+
 
   $.ajax(
     //BACKEND_URL + "/person", // request url
@@ -56,6 +78,11 @@ function save() {
 
           console.log(postData);
           goto('index.html');
+        }
+        else
+        {
+          console.log(data);
+              $("#errorMsg").html("<span>" + data.message + "</span>");
         }
       }
 
@@ -80,6 +107,12 @@ function readyForm() {
             $("input[name=id]").val(person.id);
             $("input[name=first_name]").val(person.first_name);
             $("input[name=last_name]").val(person.last_name);
+            $("#birthday").val(person.birthday);
+            $("#gender").val(person.gender);
+            $("#email").val(person.email);
+            $("#mobileno").val(person.mobileno);
+            $("#isFilipino").prop('checked', person.isFilipino);
+            
           }
         },
       }
@@ -90,15 +123,15 @@ function readyForm() {
 function searchById() {
 
   let id = $("input[name=personId]").val();
-  let url =  "";
- 
-  if(id != ""){
+  let url = "";
+
+  if (id != "") {
     url = id;
   }
   $.ajax(
-    
+
     BACKEND_URL + "/person/" + url, // request url
-    
+
     {
       type: 'GET',
       success: function (data, status, xhr) {
@@ -106,7 +139,7 @@ function searchById() {
         $("#table1 > tbody").html("");
         for (let person of data.list) {
           // console.log(person);
-          
+
           let rowHtml = `<tr>
                 <td><a href="form.html?id=${person.id}">${person.id}</a></td>
                 <td>${person.first_name}</td>
@@ -123,15 +156,15 @@ function searchById() {
 function searchByAny() {
 
   let searchstr = $("input[name=personId]").val();
-  let url =  "";
- 
-  if(searchstr != ""){
+  let url = "";
+
+  if (searchstr != "") {
     url = searchstr;
   }
   $.ajax(
-    
+
     BACKEND_URL + "/person/" + url, // request url
-    
+
     {
       type: 'GET',
       success: function (data, status, xhr) {
@@ -139,7 +172,7 @@ function searchByAny() {
         $("#table1 > tbody").html("");
         for (let person of data.list) {
           // console.log(person);
-          
+
           let rowHtml = `<tr>
                 <td><a href="form.html?id=${person.id}">${person.id}</a></td>
                 <td>${person.first_name}</td>
