@@ -3,7 +3,7 @@ const fs = require('fs');
 const http = require('http');
 const bodyParser = require('body-parser');
 const moment = require('moment');
-const { getSystemErrorName } = require('util');
+const { isUint32Array, isInt32Array } = require('util/types');
 var app = express();
 
 
@@ -41,6 +41,10 @@ function validate(req) {
         errMsg += "<li>Birthday is required!</li> \n";
     }
 
+    if(req.body.gender == "") {
+        errMsg += "<li>Please select gender!</li>";
+    }
+
     if (!moment(req.body.birthday, "YYYY-MM-DD").isValid()) {
         errMsg += "<li>Invalid Birthday!</li> \n";
     }
@@ -48,7 +52,10 @@ function validate(req) {
     if (!req.body.email.includes("@")) {
         errMsg += "<li>Invalid email address</li>";
     }
-
+    if (req.body.mobileno.match(/^[0-9]+$/) == null) {
+        errMsg += "<li>Mobile # is incorrect format</li>";
+    }
+    
     if (req.body.mobileno.length != 11) {
         errMsg += "<li>Mobile # invalid</li>";
     }

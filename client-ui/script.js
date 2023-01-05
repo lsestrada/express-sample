@@ -24,7 +24,7 @@ function loadList() {
                 <td>${person.age}</td>
                 <td>${person.gender}</td>
                 <td>${person.email}</td>
-                <td>${person.mobile}</td>
+                <td>${person.mobileno}</td>
                 <td><input type="checkbox" ` + $checked + ` disabled/></td>
                 <td><button onclick="deletePerson(${person.id}, '${person.first_name}')">Delete</button></td>
             </tr>`;
