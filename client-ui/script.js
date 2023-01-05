@@ -111,7 +111,7 @@ function readyForm() {
             $("#gender").val(person.gender);
             $("#email").val(person.email);
             $("#mobileno").val(person.mobileno);
-            $("#isFilipino").prop('checked', person.isFilipino);
+            $("#isFilipino").prop('checked', person.isFilipino == 'true'? true : false);
             
           }
         },
