@@ -132,7 +132,12 @@ app.get('/person/:searchstr', (req, res) => {
     result.status = 1;
     result.message = "Displaying person with " + searchstr;
     result.list = listDataJson.filter((item) => {
-        return (+item.id == +searchstr || item.first_name.toLowerCase().includes(searchstr) || item.last_name.toLowerCase().includes(searchstr)); // Note: + before variable means casting string value into integer
+        return (+item.id == +searchstr || 
+                item.first_name.toLowerCase().includes(searchstr) || 
+                item.last_name.toLowerCase().includes(searchstr) ||
+                item.gender.toLowerCase().includes(searchstr) ||
+                item.birthday.toLowerCase().includes(searchstr)
+                ); // Note: + before variable means casting string value into integer
     });
 
     res.send(result);
