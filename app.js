@@ -134,9 +134,7 @@ app.get('/person/:searchstr', (req, res) => {
     result.list = listDataJson.filter((item) => {
         return (+item.id == +searchstr || 
                 item.first_name.toLowerCase().includes(searchstr) || 
-                item.last_name.toLowerCase().includes(searchstr) ||
-                item.gender.toLowerCase().includes(searchstr) ||
-                item.birthday.toLowerCase().includes(searchstr)
+                item.last_name.toLowerCase().includes(searchstr) 
                 ); // Note: + before variable means casting string value into integer
     });
 
@@ -154,6 +152,7 @@ app.put('/person/:id', (req, res) => {
         result.message = errMsg;
     }
     else {
+        console.log(req.body);
         result.status = 1;
         result.message = "Updating person with id  " + id;
         let updatedList = listDataJson.map((item) => {

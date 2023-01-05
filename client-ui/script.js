@@ -12,7 +12,7 @@ function loadList() {
         for (let person of data.list) {
           // console.log(person);
           var $checked = "";
-          if(person.isFilipino)
+          if(person.isFilipino == "true")
           {
             $checked = "checked";
           }  
