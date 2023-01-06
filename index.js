@@ -81,14 +81,12 @@ http
           "attachment; filename=" + fileName
         );
 
-
         // workbook.xlsx.write(res).then(function (data) {
         //   res.end();
         //   console.log("File write done........");
         // });
 
         await workbook.xlsx.write(res);
-
 
         // await workbook.xlsx.writeFile("output/" + fileName);
         res.end();
