@@ -1,4 +1,5 @@
 <html>
+<<<<<<< HEAD
   <script
     src="https://code.jquery.com/jquery-3.6.2.min.js"
     integrity="sha256-2krYZKh//PcchRtd+H+VyyQoZ/e3EcrkxhM8ycwASPA="
@@ -8,12 +9,96 @@
   <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
   <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
   <script src="script.js"></script>
+=======
+
+  <head>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.2.min.js"
+      integrity="sha256-2krYZKh//PcchRtd+H+VyyQoZ/e3EcrkxhM8ycwASPA=" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <script src="script.js"></script>
+    <script>
+      $(function () {
+        $("#birthday").datepicker();
+        $("#birthday").datepicker("option", "dateFormat", "yy-mm-dd");
+
+      });
+    </script>
+    </script>
+  </head>
+
+>>>>>>> e5f854aaff71109ac94c9cf9c7da6b6b07c1bab1
   <body onload="readyForm()">
     <h1>New Person</h1>
 
     <form onsubmit="return false;">
       <input name="id" hidden /> <br />
+      <table>
+        <tr>
+          <td>
+            <label>First Name</label> :
+          </td>
+          <td>
+            <input name="first_name" />
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label>Last Name</label>
+          </td>
+          <td>
+            <input name="last_name" /> <br />
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label>Birthday</label>
+          </td>
+          <td>
+            <input type="text" name="birthday" id="birthday" /> <br />
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label>Gender: </label>
+          </td>
+          <td>
+            <select id="gender">
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+              <option value="Others">Others</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label>Email</label>
+          </td>
+          <td>
+            <input type="text" id="email" /> <br />
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label>Mobile #</label>
+          </td>
+          <td>
+            <input type="text" id="mobileno" /> <br />
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <input type="checkbox" id="isFilipino" /> <br />
+          </td>
+          <td>
+            <label>Are you a Filipino? </label>
+          </td>
+        </tr>
 
+<<<<<<< HEAD
       <label>First Name</label>
       <input name="first_name" /> <br />
 
@@ -33,6 +118,12 @@
       <input type="checkbox" id="imnotarobot" /> <br />
 
       <div id="errorMessage"></div>
+=======
+      </table>
+      <div id="errorMsg">
+
+      </div>
+>>>>>>> e5f854aaff71109ac94c9cf9c7da6b6b07c1bab1
       <button onclick="save()">Submit</button>
     </form>
     <script>
@@ -47,4 +138,5 @@
       
     </script>
   </body>
+
 </html>
