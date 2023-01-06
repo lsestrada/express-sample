@@ -26,22 +26,44 @@ var result = {
 let listDataRaw = fs.readFileSync("database/person-list.json");
 listDataJson = JSON.parse(listDataRaw);
 
+
+function validate(form){
+    if (person.first_name == ""){
+        return "Firstname is required";
+    }else if (person.last_name == ""){
+        return "Lastname is required";
+    } else {
+        return "";
+    }
+
+}
+
 app.post('/person', function (req, res) {
-
-
-   //    let dataObj = req.body;
+let errorMessage = req.body.errorMessage;
+if (errorMessage !=""){
+    result.status = 0;
+    result.errorMessage = errorMessage; 
+} else {
     console.log(req.body);
     // console.log(dataObj);
+    result.status = 1;
     let newPerson = {
         id: listDataJson.length + 1,
         first_name: req.body.first_name,
         last_name: req.body.last_name,
+        datepicker: req.body.datepicker,
+        Gender: req.body.Gender,
+        imnotarobot: req.body.imnotarobot,
+
     };
     listDataJson.push(newPerson);
     writeFile(JSON.stringify(listDataJson));
-    result.status = 1;
+    
     result.message = "Inserting new person";
     result.list = listDataJson;
+}
+   //    let dataObj = req.body;
+    
     res.send(result);
 
 });
@@ -77,6 +99,9 @@ app.put('/person/:id', (req, res) => {
         if (+item.id == +id) {
             item.first_name = req.body.first_name;
             item.last_name = req.body.last_name;
+            item.datepicker = req.body.datepicker;
+            item.Gender = req.body.Gender;
+            item.imnotarobot = req.body.imnotarobot;
         }
         return item;
     });

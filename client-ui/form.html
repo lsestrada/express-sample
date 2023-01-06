@@ -4,6 +4,9 @@
     integrity="sha256-2krYZKh//PcchRtd+H+VyyQoZ/e3EcrkxhM8ycwASPA="
     crossorigin="anonymous"
   ></script>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+  <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
   <script src="script.js"></script>
   <body onload="readyForm()">
     <h1>New Person</h1>
@@ -16,8 +19,32 @@
 
       <label>Last Name</label>
       <input name="last_name" /> <br />
+      <label>Birthday</label>
+      <input type="text" name="datepicker" id="datepicker" /> <br />
 
+      <label>Sex </label>
+      <select name="Kasarian" id="Gender">
+        <option value="n/a">Please select</option>
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
+      </select>
+      <br />
+      <label>Im not a robot </label>
+      <input type="checkbox" id="imnotarobot" /> <br />
+
+      <div id="errorMessage"></div>
       <button onclick="save()">Submit</button>
     </form>
+    <script>
+      $(function () {
+        $("#datepicker").datepicker();
+       // $("#datepicker").datepicker("option", "dateFormat", "yy-mm-dd");
+        
+        
+      });
+
+
+      
+    </script>
   </body>
 </html>
